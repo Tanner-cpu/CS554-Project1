@@ -56,7 +56,8 @@ This Service Restart Policy tells Docker to reboot Node.js if the app crashes wi
    <img width="791" height="50" alt="Screenshot 2026-09-27 224906" src="https://github.com/user-attachments/assets/178c34dc-6502-4751-a821-1bc26e8e4bcf" />
 
 10. Cleanly Remove All Project Resources
-   <img width="780" height="135" alt="Screenshot 2026-09-27 225021" src="https://github.com/user-attachments/assets/7d425e5b-14ce-434e-bbd6-d71e18f37909" />
+   <img width="780" height="135" alt="Screenshot 2026-09-27 225021" src="https://github.com/user-attachments/assets/bf394f3d-0242-420d-9e1b-fe7dd4f1f7a0" />
+
 
 
 
