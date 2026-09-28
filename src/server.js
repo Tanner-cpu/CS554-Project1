@@ -44,9 +44,6 @@ function redisCommand(command) {
         socket.on('connect', () => socket.write(command + '\r\n'));
         socket.on('data', chunk => {
             data += chunk.toString();
-            // Redis keeps the connection open for more commands, so there is no
-            // 'end' event to wait for. One command means one reply line: as soon as
-            // we see its CRLF terminator we have the whole answer and can hang up.
             if (data.includes('\r\n')) {
                 socket.end();
                 resolve(data.trim());
@@ -83,14 +80,11 @@ app.get('/convert', async (req, res) => {
     }
 
     try {
-
+        
         const kg = Number((lbsNum * 0.45359237).toFixed(3));
-
-        // 5. Increment the Redis key (assumes `redisClient` is connected globally)
-        //await redisClient.incr('conversions');
-
         let redisCount = null;
         let redisError = null;
+        
         try {
             redisCount = await redisIncr('conversions');
         } catch (error) {
@@ -158,7 +152,6 @@ const shutdown = (signal) => {
         console.log('Server closed.');
 
         try {
-            // Send the raw Redis protocol disconnect command
             await redisCommand('QUIT');
             console.log('Redis client connection closed cleanly.');
         } catch (err) {
