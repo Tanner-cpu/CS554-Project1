@@ -24,3 +24,9 @@ The application locates Redis via a private container network that is handled aw
 
 ## Service Restart Policy 
 This Service Restart Policy tells Docker to reboot Node.js if the app crashes with a non-zero exit code with a limit of 5 attempts. This policy does not apply if an admin uses docker compose down or docker stop. One failure scenario is if the Redis container crashes, leaving the database completely inaccessible. The /stats API endpoint would fail with a 503 error. It would also result in not allowing the applied conversions to properly update the Redis counter. 
+
+## Required Operational Demonstration 
+1. Build The Application Image
+   <img width="891" height="516" alt="Screenshot 2026-09-27 223738" src="https://github.com/user-attachments/assets/d595b300-bdbd-40e3-ac6d-8a693fd41e5a" />
+
+3. 
