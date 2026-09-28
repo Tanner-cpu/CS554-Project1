@@ -125,7 +125,7 @@ app.get('/stats', async (req, res) => {
         });
 
     } catch (error) {
-        return res.status(500).json({ error: 'Failed to fetch status' });
+        return res.status(503).json({ error: 'Failed to fetch status' });
     }
 });
 
