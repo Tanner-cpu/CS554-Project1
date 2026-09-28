@@ -1,6 +1,6 @@
 ## Prerequisites
-Docker / Docker Compose
-Curl
+- Docker / Docker Compose
+- Curl
 
 ## How to Build and Run
 docker compose up --build
