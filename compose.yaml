@@ -1,0 +1,41 @@
+
+networks:
+  app-net:
+    driver: bridge
+    internal: false
+
+volumes:
+  redis-data:
+    driver: local
+
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      SERVICE_NAME: my-application
+      REDIS_HOST: redis
+    restart: on-failure:5
+    networks: 
+      - app-net
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3  
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis-data:/data
+    networks: 
+      - app-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 1s
+      retries: 10
