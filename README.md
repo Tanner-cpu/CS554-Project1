@@ -17,8 +17,9 @@ docker compose up --build
 docker compose logs
 
 ## How to Stop and Clean Application 
-- docker compose down 
-- docker compose down -v (remove volumes)
+- docker compose stop (pauses containers)
+- docker compose down (deletes containers)
+- docker compose down -v (deletes containers and removes volumes)
 
 ## Design Decisions
 The application locates Redis via a private container network that is handled away from the host. It locates Redis with environment variables, configuration files, and its given service name. It is not exposed to the host because it acts as an internal service within the application for security and isolation reasons (preventing data leaks or unauthorized access). The Redis volume is separate from the Redis container to assist with maintenance and enforce data persistence. A containerized design is a lighter weight solution in comaprison to a VM, which means we save resources, like memory and storage, with a containerized application. One limitation to having this application containerized rather than directly on a VM is that this solution offers less security, since the cotainers share the underlying host OS kernel. If this application was implemented on a VM, one major tradeoff would be setup time and portability. The setup time for containerized environments are minimal when compared to the setup time of a VM. An entire replication of a VM with the proper dependencies would be required to run this application if directly on a VM. Another trade off would be the automated process management that a containerized environment offers. A VM would require configuration of OS tools to provide proper restart policies or logging. 
